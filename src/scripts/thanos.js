@@ -1,11 +1,9 @@
 import { PATH_DB } from '../constants/contacts.js';
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const dbPath = path.resolve(__dirname, PATH_DB);
+const pathToWorkDir = path.join(process.cwd());
+const dbPath = path.join(pathToWorkDir, PATH_DB);
 
 export const thanos = async () => {
   try {
