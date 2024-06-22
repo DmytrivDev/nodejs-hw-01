@@ -1,17 +1,15 @@
-import { PATH_DB } from '../constants/contacts.js';
-import fs from 'node:fs/promises';
-import path from 'node:path';
+import fs from 'fs/promises';
 
-const pathToWorkDir = path.join(process.cwd());
-const dbPath = path.join(pathToWorkDir, PATH_DB);
+import { PATH_DB } from '../constants/contacts.js';
 
 export const countContacts = async () => {
   try {
-    const data = await fs.readFile(dbPath, 'utf8');
-    const existingUsers = JSON.parse(data).length;
-    return existingUsers;
-  } catch (err) {
-    console.error('Помилка читання файлу:', err);
+    const data = await fs.readFile(PATH_DB, 'utf8');
+    const contacts = JSON.parse(data);
+
+    return contacts.length;
+  } catch (error) {
+    console.error('Error generating contacts:', error);
   }
 };
 

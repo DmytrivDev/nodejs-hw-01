@@ -1,16 +1,13 @@
-import { PATH_DB } from '../constants/contacts.js';
-import fs from 'node:fs/promises';
-import path from 'node:path';
+import fs from 'fs/promises';
 
-const pathToWorkDir = path.join(process.cwd());
-const dbPath = path.join(pathToWorkDir, PATH_DB);
+import { PATH_DB } from '../constants/contacts.js';
 
 export const removeAllContacts = async () => {
-  try {
-    await fs.writeFile(dbPath, '[]', 'utf8');
-  } catch (err) {
-    console.error('Помилка запису у файл:', err);
-  }
+  const removeContacts = [];
+
+  const contactsJSON = JSON.stringify(removeContacts, null, 2);
+
+  await fs.writeFile(PATH_DB, contactsJSON, 'utf8');
 };
 
 await removeAllContacts();
